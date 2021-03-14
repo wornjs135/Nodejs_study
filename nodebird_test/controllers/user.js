@@ -1,13 +1,6 @@
-const express = require('express');
-
-const {isLoggedIn} = require('./middlewares');
 const User = require('../models/user');
 
-const router = express.Router();
-
-// POST /user/1/follow (1번사용자를 빨로우한다)
-//여기선 req.params.id값은 1
-router.post('/:id/follow', isLoggedIn, async (req, res, next) => {
+exports.addFollowing = async (req, res, next) => {
     try {
         //자신의 대한 객체를 찾고
         const user = await User.findOne({where: {id: req.user.id}});
@@ -24,6 +17,4 @@ router.post('/:id/follow', isLoggedIn, async (req, res, next) => {
         console.error(error);
         next(error);
     }
-});
-
-module.exports = router;
+}

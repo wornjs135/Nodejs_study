@@ -5,7 +5,7 @@ const router = express.Router();
 
 //자주쓰니까 만들어놓음
 const URL = 'http://localhost:8002/v2';
-//노드캣 주소를 넣어놓음. 안넣어놓으면 nodebird-api에서 요청이 어디서 왔는지 알 수 있게.
+//노드캣 주소를 넣어놓음. nodebird-api에서 요청이 어디서 왔는지 알 수 있게.
 //브라우저에서 서버로 보낼땐 origin이 자동으로 넣어주기도 하는데
 //서버에서 서버로 보낼땐 자동으로 안들어가는 경우가 많아서 직접 넣음
 //cors에러 해결할때도 쓰임

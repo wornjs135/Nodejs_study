@@ -20,7 +20,7 @@ const app = express();
 /*process.env.PORT는 나중에 배포할때는 80(http)이나 443(https)을 쓰는데 개발할 때는 8081포트를 쓰다가
 배포할때는 .env파일에서 PORT=80 이런식으로 넣어줄거임.(배포때, 개발때 포트를 다르게 사용하기 위해서
 이렇게 표현함)*/
-app.set('port', process.env.PORT || 8081);
+app.set('port', process.env.PORT || 8001);
 app.set('view engine', 'html');
 nunjucks.configure('views', {
     express: app,
@@ -85,6 +85,9 @@ app.use((err, req, res, next) => {
     res.render('error');
 });
 
+//app.js를 supertest 하기 위해 listen을 따로 빼줌(server.js에)
+//listen이 여기 있으면 테스트 중에 실제로 서버가 돌아가버리니깐
+//module.exports = app;
 app.listen(app.get('port'), () => {
     console.log(app.get('port'), '번 포트에서 대기중');
 });
