@@ -8,8 +8,8 @@ router.use((req, res, next) => {
     //render 할 때 필요한 user변수를 아래의 라우터들에 한번에 넣어주기
     res.locals.user = req.user;
     res.locals.followerCount = req.user ? req.user.Followers.length : 0;
-    res.locals.followingCount = req.user ? req.user.Followings : 0;
-    res.locals.followingIdList = req.user ? req.user.Followings.map(f => f.id) : [];
+    res.locals.followingCount = req.user ? req.user.Followings.length : 0;
+    res.locals.followerIdList = req.user ? req.user.Followings.map(f => f.id) : [];
     next();
   });
 
@@ -46,7 +46,7 @@ router.get('/', async (req, res, next) => {
 
 //해시태그 검색
 // GET /hashtag?hashtag=노드
-router.get('/', async (req, res, next) => {
+router.get('/hashtag', async (req, res, next) => {
     const query = req.query.hashtag;
     //해시태그 검색인데 내용이 없으면 메인페이지
     if (!query) {

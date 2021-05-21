@@ -3,8 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-const { Post } = require('../models/post');
-const { Hashtag } = require('../models/hashtag')
+const { Post, Hashtag } = require('../models/');
 const { isLoggedIn } = require('./middlewares');
 
 const router = express.Router();
@@ -27,7 +26,7 @@ const upload = multer({
         //파일명의 중복을 막기 위해 업로드한 날짜를 파일명에 붙여줌
         filename(req, file, cb) {
             const ext = path.extname(file.originalname);
-            cb(null, paht.basename(file.originalname, ext) + Date.now() + ext);
+            cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
         },
     }),
     limits: { fileSize: 5 * 1024 * 1024 },

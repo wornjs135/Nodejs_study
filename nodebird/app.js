@@ -14,13 +14,13 @@ const authRouter = require('./routes/auth');
 const postRouter = require('./routes/post');
 const userRouter = require('./routes/user');
 const { sequelize } = require('./models');
-const passportConfig = require('./passport')
+const passportConfig = require('./passport');
 
 const app = express();
 /*process.env.PORT는 나중에 배포할때는 80(http)이나 443(https)을 쓰는데 개발할 때는 8081포트를 쓰다가
 배포할때는 .env파일에서 PORT=80 이런식으로 넣어줄거임.(배포때, 개발때 포트를 다르게 사용하기 위해서
 이렇게 표현함)*/
-app.set('port', process.env.PORT || 8081);
+app.set('port', process.env.PORT || 8083);
 app.set('view engine', 'html');
 nunjucks.configure('views', {
     express: app,

@@ -3,7 +3,7 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const User = require('../models/user');
+const { User } = require('../models');
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
     //프론트에서 이메일 닉네임 비밀번호를 받아
     const { email, nick, password } = req.body;
     try {
-        //검사: 기존에 있는 이메일로 가입하는지 검
+        //검사: 기존에 있는 이메일로 가입하는지 검사
         const exUser = await User.findOne({ where: { email } });
         if (exUser) {
             return res.redirect('/join?error=exist');
@@ -61,7 +61,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
 router.get('/logout', isLoggedIn, (req, res) => {
     req.logout();  //실행되면 세션 쿠키가 사라짐
     req.session.destroy();
-    req.redirect('/');
+    res.redirect('/');
 });
 
 // passport.authenticate가 실행되면 카카오 페이지로 가서 로그인을 하게되고, 로그인을 성공하면 카카오가 /kakao/callback으로 요청을 하나 쏴줌
